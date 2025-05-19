@@ -1,1 +1,74 @@
-[{"monto": 200000.0, "categoria": "comida", "descripcion": "Mercagan", "fecha": "2025-05-16 20:05:01.453805"}]
+[
+    {
+        "monto": 200000.0,
+        "categoria": "comida",
+        "descripcion": "Mercagan",
+        "fecha": "2025-05-16 20:05:01.453805"
+    },
+    {
+        "monto": 50000.0,
+        "categoria": "cine",
+        "descripcion": "cine con la mal educada",
+        "fecha": "2025-05-19 17:52:44.761705"
+    },
+    {
+        "monto": 40000.0,
+        "categoria": "Transporte",
+        "descripcion": "Gasolina",
+        "fecha": "2025-05-19 18:10:06.855522"
+    },
+    {
+        "monto": 7000.0,
+        "categoria": "entretenimiento",
+        "descripcion": "Juegos de azar",
+        "fecha": "2025-05-19 18:11:17.666301"
+    },
+    {
+        "monto": 8000.0,
+        "categoria": "comida",
+        "descripcion": "Desayuno",
+        "fecha": "2025-05-19 14:30:00"
+    },
+    {
+        "monto": 8000.0,
+        "categoria": "comida",
+        "descripcion": "cena",
+        "fecha": "2025-05-19 14:30:00"
+    },
+    {
+        "monto": 8000.0,
+        "categoria": "comida",
+        "descripcion": "almuerzo",
+        "fecha": "2025-05-19 14:30:00"
+    },
+    {
+        "monto": 8000.0,
+        "categoria": "comida",
+        "descripcion": "Desayuno",
+        "fecha": "2025-05-19 14:30:00"
+    },
+    {
+        "monto": 8000.0,
+        "categoria": "comida",
+        "descripcion": "merienda",
+        "fecha": "2025-05-19 14:30:00"
+    },
+    {
+        "monto": 8000.0,
+        "categoria": "comida",
+        "descripcion": "hambuerguesa",
+        "fecha": "2025-05-19 14:30:00"
+    },
+    {
+        "monto": 9000.0,
+        "categoria": "otros",
+        "descripcion": "apuesta betplay",
+        "fecha": "2025-05-19 19:29:23.968525"
+    },
+    {
+        "monto": 9000.0,
+        "categoria": "comida",
+        "descripcion": "salchipapa",
+        "fecha": "2025-05-19 19:43:13.473806"
+    }
+]

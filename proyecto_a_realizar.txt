@@ -49,9 +49,9 @@ permite mantener un historial de gastos entre distintas sesiones del programa.
 Problemática
 Muchos usuarios desean llevar un registro de sus gastos, pero las aplicaciones de gestión financiera completas
 pueden ser complicadas y requieren configuraciones avanzadas. Este proyecto ofrece una solución simple y
-accesible para aquellos que buscan hacer un seguimiento básico de sus gastos en un formato amigable y sin
+accesible para aquellos que buscan hacer un seguimiento básico de sus gastos en ua de su situación financiern formato amigable y sin
 demasiadas complejidades. Con el Simulador de Gasto Diario, los usuarios pueden organizar sus gastos de
-forma práctica y recibir una visión clara de su situación financiera diaria, semanal o mensual.
+forma práctica y recibir una visión clara diaria, semanal o mensual.
 
 Tecnologías y Herramientas
 Front-end:
