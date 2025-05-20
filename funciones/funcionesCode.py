@@ -47,14 +47,14 @@ def mostrarConFechas(listaGastos,fechaInicial,fechaFinal):
                     print("Descripción:",listaGastos[i]["descripcion"])
                     listaFecha = recorrerFecha (listaGastos,i)
 
-def calcularDiario(listaGastos):
-            diaActual = datetime.now().date()
-            diaActualFormat = datetime.strptime(diaActual,"%d-%m-%Y")
+def calcularDiario(listaGastos,diaFormat):
+            totalDiario = 0
             for i in range(len(listaGastos)):
-                convertirFecha = datetime.strptime(listaGastos[i]["fecha"][0]["dia"],"%d-%m-%Y").date()
-                if(diaActualFormat == convertirFecha):
+                convertirFecha = datetime.strptime(listaGastos[i]["fecha"][0]["dia"], "%d-%m-%Y").date()
+                if(diaFormat == convertirFecha):
                     totalDiario = totalDiario + listaGastos[i]["monto"]
             print("=============================================")
-            print("         Gastos en el día de hoy ============")
-            print("======="+diaActualFormat+"===================")
-                    
+            print("      Gastos en el día de hoy                ")
+            print("       "+str(diaFormat)+"                    ")
+            print("         "+str(totalDiario)+"                ")
+            print("=============================================")

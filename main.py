@@ -134,8 +134,10 @@ while(ejecucionPrograma):
         if(calcularGasto == 1): #Total diario: Calcula y muestra el total de gastos del día actual.
             print("=============================================")
             print("               Total Gasto Diario")
-            print("=============================================") 
-
+            print("=============================================")
+            diaActual = str(datetime.now().date())
+            diaActualFormat = datetime.strptime(diaActual, "%Y-%m-%d").date()
+            calcularDiario(listaGastos,diaActualFormat)
         '''
 =============================================
           Calcular Total de Gastos
