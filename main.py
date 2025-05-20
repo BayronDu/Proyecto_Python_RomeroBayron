@@ -1,20 +1,4 @@
 #PROGRAMA QUE PERMITE REGISTRAR Y MONITOREAR TUS GASTOS DIARIOS EN DIFERENTES CATEGORIAS
-
-'''
-=============================================
-         Simulador de Gasto Diario
-=============================================
-Seleccione una opción:
-
-1. Registrar nuevo gasto
-2. Listar gastos
-3. Calcular total de gastos
-4. Generar reporte de gastos
-5. Salir
-=============================================
-
-'''
-
 from datetime import datetime
 from funciones.funcionesGGDD import *
 from funciones.funcionesCode import *
@@ -52,28 +36,44 @@ while(ejecucionPrograma):
         montoGasto = float(input("- Monto del gasto: "))
         categoriaGasto = input("- Categoría (ej. comida, transporte, entretenimiento, otros): ")
         descripcionGasto = input("- Descripción (opcional): ")
+        dirGastos = {
+            "monto":montoGasto, 
+            "categoria":categoriaGasto,
+            "descripcion":descripcionGasto,
+            "fecha":[]
+                        }
+        
         print("\n=============================================")
         eleccionFecha = int(input("Digite 1. si el gasto se ha realizado el dia de hoy o 2 si el gasto se ha realizado en otra fecha: "))
         print("=============================================\n")
         if(eleccionFecha == 1):
-            fechaActual = str(datetime.now()) #fecha del momento en que se ingresa el gasto
-            dirGastos = {
-            "monto":montoGasto,
-            "categoria":categoriaGasto,
-            "descripcion":descripcionGasto,
-            "fecha":fechaActual
-                        }
+            fechaActual = (datetime.now()) #fecha del momento en que se ingresa el gasto
+            diaAhora = str(fechaActual.day)
+            mesAhora = str(fechaActual.month)
+            anioAhora = str(fechaActual.year)
+            horaAhora = str(fechaActual.hour)
+            minutosAhora = str(fechaActual.minute)
+            
+            dirFecha = {"dia":diaAhora+"-"+mesAhora+"-"+anioAhora,
+                        "hora": horaAhora+":"+minutosAhora}
+            dirGastos["fecha"].append(dirFecha)
+            #listaGastos.append(dirGastos)
             
         elif(eleccionFecha == 2):
             fecha2 = input("Por favor digite la fecha y la hora del gasto(año,mes,dia,hora,minutos)",)
-            fechaDiferente = str(datetime.strptime(fecha2,"%Y,%m,%d,%H,%M"))
-            dirGastos = {
-            "monto":montoGasto,
-            "categoria":categoriaGasto,
-            "descripcion":descripcionGasto,
-            "fecha":fechaDiferente
-                        }
+            fechaDiferente = (datetime.strptime(fecha2,"%d,%m,%Y,%H,%M"))
+            diaDif = str(fechaDiferente.day)
+            mesDif = str(fechaDiferente.month)
+            anioDif = str(fechaDiferente.year)
+            horaDif = str(fechaDiferente.hour)
+            minutos = str(fechaDiferente.minute)
+            dirFecha = {"dia":diaDif+"-"+mesDif+"-"+anioDif,
+                        "hora": horaDif+":"+mesDif}
+            dirGastos["fecha"].append(dirFecha)
+            #listaGastos.append(dirGastos)
+
             
+
         seleccion = input("Ingrese 'S' para guardar o 'C' para cancelar: ")
         seleccionMayus = seleccion.capitalize()
 
@@ -83,11 +83,12 @@ while(ejecucionPrograma):
             print("¡DATOS GUARDADOS CON ÉXITO!")
             print("=============================================\n")
 
+
         elif (seleccionMayus == "C"):
-            listaGastos.append(dirGastos)
+            
             print("¡LOS DATOS NO SE HAN ALMACENADO!")
             print("=============================================\n")
-    
+        
     elif(opcionUsuario == 2):
         print("=============================================")
         print("                Listar Gastos")
@@ -104,31 +105,59 @@ while(ejecucionPrograma):
             mostrarTodos(listaGastos)
 
         elif(listarGasto == 2):
-            categoria = input("Por favor, digite la categoria que quieras consultar(ej. comida, transporte, entretenimiento, otros): ")
+            categoria = input("Por favor, digite la categoria que quieras consultar(ej. comida, transporte, entretenimiento, otros): \n")
             catergoriaMayus = categoria.lower()
-            cont =1
             mostrarUna(listaGastos,categoria)
 
         elif(listarGasto == 3):
-            print("HOLA")
+            print("=============================================")
+            print("                Rango de fechas")
+            print("=============================================")
+            fechaInicialStr = input("Por favor, digite la fecha inicial(dd,mm,aaaa): ")
+            fechaFinalStr  = input("Por favor, digite la fecha final(dd,mm,aaaa): ")
+            fechaInicial =  datetime.strptime(fechaInicialStr,"%d-%m-%Y").date()
+            fechaFinal = datetime.strptime(fechaFinalStr,"%d-%m-%Y").date()
+            
+            mostrarConFechas(listaGastos,fechaInicial,fechaFinal)
+        elif(listarGasto == 4):
+            print("=============================================")
+            print("        Regresando al menú principal=========")
+            print("=============================================")
+            
+    elif(opcionUsuario == 3):
+        print("=============================================")
+        print("               Calcular Gastos")
+        print("=============================================")
+        calcularGasto = int(input("Seleccione el periodo de cálculo: \n1. Calcular total diario \n2. Calcular total semanal \n3. Calcular total mensual \n4. Regresar al menú principal\n"))
+        print("=============================================")
+        
+        if(calcularGasto == 1): #Total diario: Calcula y muestra el total de gastos del día actual.
+            print("=============================================")
+            print("               Total Gasto Diario")
+            print("=============================================") 
+        diaActual = datetime.now().date()
+        diaActualFormat = datetime.strptime(diaActual,"%d-%m-%Y")
+        
+
+
 
 
 
         '''
 =============================================
-                Listar Gastos
+          Calcular Total de Gastos
 =============================================
-Seleccione una opción para filtrar los gastos:
+Seleccione el periodo de cálculo:
 
-1. Ver todos los gastos
-2. Filtrar por categoría
-3. Filtrar por rango de fechas
+1. Calcular total diario
+2. Calcular total semanal
+3. Calcular total mensual
 4. Regresar al menú principal
 =============================================
 '''
 
 
     elif(opcionUsuario == 5):
-        print("Ejecución terminada. \n !Nos vemos pronto¡")
+        print("Ejecución terminada. \n ¡Nos vemos pronto!")
         ejecucionPrograma = False
 
