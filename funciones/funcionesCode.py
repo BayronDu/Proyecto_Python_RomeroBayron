@@ -54,4 +54,7 @@ def calcularDiario(listaGastos):
                 convertirFecha = datetime.strptime(listaGastos[i]["fecha"][0]["dia"],"%d-%m-%Y").date()
                 if(diaActualFormat == convertirFecha):
                     totalDiario = totalDiario + listaGastos[i]["monto"]
+            print("=============================================")
+            print("         Gastos en el día de hoy ============")
+            print("======="+diaActualFormat+"===================")
                     

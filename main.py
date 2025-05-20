@@ -135,13 +135,6 @@ while(ejecucionPrograma):
             print("=============================================")
             print("               Total Gasto Diario")
             print("=============================================") 
-        diaActual = datetime.now().date()
-        diaActualFormat = datetime.strptime(diaActual,"%d-%m-%Y")
-        
-
-
-
-
 
         '''
 =============================================
