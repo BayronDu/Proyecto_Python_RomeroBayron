@@ -145,7 +145,10 @@ while(ejecucionPrograma):
                 print("=============================================")
                 print(str("Total Gastos el dia de hoy").center(linea))
                 #print("=============================================")
-                calcularDiario(listaGastos,diaActualFormat)
+                totalDiario = calcularDiario(listaGastos,diaActualFormat)
+                print(str(str(diaActualFormat).center(linea)))
+                print(str(str(totalDiario)).center(linea))
+                print("=============================================")
 
             elif(calcularGasto == 2): #Total semanal: Calcula y muestra el total de gastos de los últimos siete días.
                 print("=============================================")
@@ -165,21 +168,25 @@ while(ejecucionPrograma):
                 print(str("Volviendo al menú anterior").center(linea))
                 print("=============================================")
                 opcion3 = False
-        '''
-=============================================
-          Calcular Total de Gastos
-=============================================
-Seleccione el periodo de cálculo:
 
-1. Calcular total diario
-2. Calcular total semanal
-3. Calcular total mensual
-4. Regresar al menú principal
-=============================================
-'''
-
+    elif(opcionUsuario == 4):
+        diaActual = datetime.now()
+        diaActualFormat = diaActual.strftime(" %A, %d de %B de %Y")
+        
+        diaActual1 = str(datetime.now().date())
+        diaActual2 = datetime.strptime(diaActual1, "%Y-%m-%d").date()
+        totalDiario = calcularDiario(listaGastos,diaActual2)
+        verGuardar = int(input(f"¿Desea ver el reporte en pantalla o desea guardalo en un archivo .JSON?\n Presione 1 para ver en pantalla o 2 para guardar: "))
+        if(verGuardar == 1):
+            print(f'Reporte de gastos del día:{diaActualFormat}')
+            print("="*linea)
+            print(f"Total de Gastos: ${totalDiario}\n")
+            print(f"Por categorías: \n")
+            sumarCat(listaGastos)
+        elif(verGuardar == 2):
+            guardarReporteEnJSON(listaGastos,"reporte_gastos_diario.json")   
+            
 
     elif(opcionUsuario == 5):
         print("Ejecución terminada. \n ¡Nos vemos pronto!")
         ejecucionPrograma = False
-
