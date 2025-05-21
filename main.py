@@ -1,5 +1,5 @@
 #PROGRAMA QUE PERMITE REGISTRAR Y MONITOREAR TUS GASTOS DIARIOS EN DIFERENTES CATEGORIAS
-from datetime import datetime
+from datetime import *
 from funciones.funcionesGGDD import *
 from funciones.funcionesCode import *
 
@@ -90,54 +90,81 @@ while(ejecucionPrograma):
             print("=============================================\n")
         
     elif(opcionUsuario == 2):
-        print("=============================================")
-        print("                Listar Gastos")
-        print("=============================================")
-        print("Seleccione una opción para filtrar los gastos: ")
-        listarGasto = int(input("1. Ver todos los gastos \n2. Filtrar por categoría \n3. Filtrar por rango de fechas \n4. Regresar al menú principal\n"))
-        #print("=============================================")
-        
-        if (listarGasto == 1):
+        opcion2 = True
+        while(opcion2):
             print("=============================================")
-            print("                Todos los Gastos")
+            print("                Listar Gastos")
             print("=============================================")
+            print("Seleccione una opción para filtrar los gastos: ")
+            listarGasto = int(input("1. Ver todos los gastos \n2. Filtrar por categoría \n3. Filtrar por rango de fechas \n4. Regresar al menú principal\n"))
+            #print("=============================================")
             
-            mostrarTodos(listaGastos)
+            if (listarGasto == 1):
+                print("=============================================")
+                print("                Todos los Gastos")
+                print("=============================================")
+                
+                mostrarTodos(listaGastos)
 
-        elif(listarGasto == 2):
-            categoria = input("Por favor, digite la categoria que quieras consultar(ej. comida, transporte, entretenimiento, otros): \n")
-            catergoriaMayus = categoria.lower()
-            mostrarUna(listaGastos,categoria)
+            elif(listarGasto == 2):
+                categoria = input("Por favor, digite la categoria que quieras consultar(ej. comida, transporte, entretenimiento, otros): \n")
+                catergoriaMayus = categoria.lower()
+                mostrarUna(listaGastos,categoria)
 
-        elif(listarGasto == 3):
-            print("=============================================")
-            print("                Rango de fechas")
-            print("=============================================")
-            fechaInicialStr = input("Por favor, digite la fecha inicial(dd,mm,aaaa): ")
-            fechaFinalStr  = input("Por favor, digite la fecha final(dd,mm,aaaa): ")
-            fechaInicial =  datetime.strptime(fechaInicialStr,"%d-%m-%Y").date()
-            fechaFinal = datetime.strptime(fechaFinalStr,"%d-%m-%Y").date()
-            
-            mostrarConFechas(listaGastos,fechaInicial,fechaFinal)
-        elif(listarGasto == 4):
-            print("=============================================")
-            print("        Regresando al menú principal=========")
-            print("=============================================")
-            
+            elif(listarGasto == 3):
+                print("=============================================")
+                print("                Rango de fechas")
+                print("=============================================")
+                fechaInicialStr = input("Por favor, digite la fecha inicial(dd,mm,aaaa): ")
+                fechaFinalStr  = input("Por favor, digite la fecha final(dd,mm,aaaa): ")
+                fechaInicial =  datetime.strptime(fechaInicialStr,"%d-%m-%Y").date()
+                fechaFinal = datetime.strptime(fechaFinalStr,"%d-%m-%Y").date()
+                
+                mostrarConFechas(listaGastos,fechaInicial,fechaFinal)
+            elif(listarGasto == 4):
+                print("=============================================")
+                print("        Regresando al menú principal=========")
+                print("=============================================")
+                opcion2 = False
+
     elif(opcionUsuario == 3):
-        print("=============================================")
-        print("               Calcular Gastos")
-        print("=============================================")
-        calcularGasto = int(input("Seleccione el periodo de cálculo: \n1. Calcular total diario \n2. Calcular total semanal \n3. Calcular total mensual \n4. Regresar al menú principal\n"))
-        print("=============================================")
-        
-        if(calcularGasto == 1): #Total diario: Calcula y muestra el total de gastos del día actual.
+        opcion3 = True #Validar 
+        while(opcion3):
             print("=============================================")
-            print("               Total Gasto Diario")
+            print(str("Calcular Gastos").center(linea))
+            print("=============================================")
+            calcularGasto = int(input("Seleccione el periodo de cálculo: \n1. Calcular total diario \n2. Calcular total semanal \n3. Calcular total mensual \n4. Regresar al menú principal\n"))
             print("=============================================")
             diaActual = str(datetime.now().date())
             diaActualFormat = datetime.strptime(diaActual, "%Y-%m-%d").date()
-            calcularDiario(listaGastos,diaActualFormat)
+       
+        
+            #calcularGasto = int(input("Opción incorrecta. Valida las opciones e intentalo nuevamente\n"))
+
+            if(calcularGasto == 1): #Total diario: Calcula y muestra el total de gastos del día actual.
+                print("=============================================")
+                print(str("Total Gastos el dia de hoy").center(linea))
+                #print("=============================================")
+                calcularDiario(listaGastos,diaActualFormat)
+
+            elif(calcularGasto == 2): #Total semanal: Calcula y muestra el total de gastos de los últimos siete días.
+                print("=============================================")
+                print(str("Total Gastos Semanales").center(linea))
+               # print("=============================================")
+                fechaLimite = diaActualFormat - timedelta(days=7)
+                calcularSemanal(listaGastos,fechaLimite)
+
+            elif(calcularGasto == 3):
+                print("=============================================")
+                print(str("Total Gasto Mensual").center(linea))
+                #print("=============================================")
+                mesFormat = datetime.strptime(diaActual, "%Y-%m-%d").month
+                calcularMes(listaGastos,mesFormat)
+            elif(calcularGasto == 4):
+                print("=============================================")
+                print(str("Volviendo al menú anterior").center(linea))
+                print("=============================================")
+                opcion3 = False
         '''
 =============================================
           Calcular Total de Gastos

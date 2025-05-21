@@ -13,3 +13,6 @@ diaAhora = str(fechaActual.day)
             "descripcion":descripcionGasto,
             "fecha":listaFecha
                         }
+
+
+
