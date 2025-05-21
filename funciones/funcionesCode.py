@@ -10,9 +10,9 @@ def recorrerFecha(listaGastos,rango):
 
 def mostrarTodos (listaGastos):
     for i in range (len(listaGastos)):
-                print("=============================================")
-                print(str("Gasto #"+str(i+1)+" ============").center(linea))
-                print("=============================================")            
+                print(f"="*linea)
+                print(f"Gasto # {i+1}".center(linea))
+                print(f"="*linea)
                 print("Monto:", str(listaGastos[i]["monto"]))
                 print("Categoria:",listaGastos[i]["categoria"])
                 print("Descripción:",listaGastos[i]["descripcion"])           
@@ -24,12 +24,12 @@ def mostrarUna(listaGastos, categoriaMayus):
     total = 0
     for i in range (len(listaGastos)):
                 if(listaGastos[i]["categoria"] == categoriaMayus):
-                    print("=============================================")
-                    print(str("Gastos por categoría"+categoriaMayus+" " +str(cont)).center(linea))
-                    print("=============================================")            
-                    print("Monto:", str(listaGastos[i]["monto"]))
-                    print("Categoria:",listaGastos[i]["categoria"])
-                    print("Descripción:",listaGastos[i]["descripcion"])
+                    print(f"="*linea)
+                    print(f"Gastos por categoría {categoriaMayus} {cont}".center(linea))
+                    print(f"="*linea)            
+                    print(f'Monto: {listaGastos[i]["monto"]}')
+                    print(f'Categoria: {listaGastos[i]["categoria"]}')
+                    print(f'Descripción: {listaGastos[i]["descripcion"]}')
                     listaFecha = recorrerFecha (listaGastos,i)
                     total = total + listaGastos[i]["monto"]
                     cont +=1
@@ -42,9 +42,9 @@ def mostrarConFechas(listaGastos,fechaInicial,fechaFinal):
         for i in range(len(listaGastos)):
                 convertirFecha = datetime.strptime(listaGastos[i]["fecha"][0]["dia"],"%d-%m-%Y").date()
                 if(fechaInicial <= convertirFecha <= fechaFinal):
-                    print("=============================================")
-                    print(str("Gastos por fecha").center(linea))
-                    print("=============================================")            
+                    print(f"="*linea)
+                    print(f"Gastos por fecha".center(linea))
+                    print(f"="*linea)
                     print(f"Monto: {listaGastos[i]['monto']}".center(linea))
                     print(f"Categoria: {listaGastos[i]['categoria']}".center(linea))
                     print(f"Descripcion: {listaGastos[i]['descripcion']}".center(linea))
@@ -56,8 +56,6 @@ def calcularDiario(listaGastos,diaFormat):
                 convertirFecha = datetime.strptime(listaGastos[i]["fecha"][0]["dia"], "%d-%m-%Y").date()
                 if(diaFormat == convertirFecha):
                     totalDiario = totalDiario + listaGastos[i]["monto"]
-            #print("=============================================")
-           # print(str("Gastos en el día de hoy").center(linea))
             return totalDiario
 
 def calcularSemanal(listaGastos,fechaLimite):
@@ -66,11 +64,9 @@ def calcularSemanal(listaGastos,fechaLimite):
                 convertirFecha = datetime.strptime(listaGastos[i]["fecha"][0]["dia"], "%d-%m-%Y").date()
                 if(fechaLimite <= convertirFecha):
                     totalSemanal = totalSemanal + listaGastos[i]["monto"]
-            #print("=============================================")
-            #print(str("Gastos Semanales").center(linea))
             print(str("Desde "+str(fechaLimite)).center(linea))
             print(str(str(totalSemanal)).center(linea))
-            print("=============================================")
+            print(f"="*linea)
 
 def calcularMes (listaGastos,mes):
             totalMes = 0
@@ -78,16 +74,14 @@ def calcularMes (listaGastos,mes):
                 convertirFecha = datetime.strptime(listaGastos[i]["fecha"][0]["dia"], "%d-%m-%Y").month
                 if (convertirFecha == (mes-1)):
                     totalMes = totalMes + listaGastos[i]["monto"]
-            #print("=============================================")
-            #print(str("Gastos Mensuales").center(linea))
             print(str("Para el mes: "+str(mes-1)).center(linea))
             print(str(str(totalMes)+"").center(linea))
-            print("=============================================")
+            print(f"="*linea)
 
-def calcularCat(listaGastos,categoria):
+def calcularCat(listaGastos,categoria,diaActualFormat):
     total = 0
     for i in range(len(listaGastos)):
-            if (categoria == listaGastos[i]["categoria"]):
+            if (categoria == listaGastos[i]["categoria"] and listaGastos[i]["fecha"][0]["dia"] == diaActualFormat):
                 total = total + listaGastos[i]["monto"]
     print(f"El total de la categoria {categoria} es de: ${total}")
     return total
@@ -101,14 +95,29 @@ def obtenerCat(listaGastos):
             categorias.append(categoria) 
     return categorias
 
-def sumarCat(listaGastos):
+def sumarCatDiario(listaGastos,diaActual):
         for i in range(len(listaGastos)):
-            print(f'{listaGastos[i]["categoria"]}'.capitalize())
+            if(listaGastos[i]["fecha"][0]["dia"] == diaActual):
+                print(f'{listaGastos[i]["categoria"]}'.capitalize())
             for q in range(len(listaGastos)):
-                    if listaGastos[q] == listaGastos[i]:
+                    if listaGastos[q] == listaGastos[i] and listaGastos[q]["fecha"][0]["dia"] == diaActual:
                         print(f'-Descripción: {listaGastos[q]["descripcion"]} | Monto: ${listaGastos[q]["monto"]} | Hora: {listaGastos[q]["fecha"][0]["hora"]}')
-            print("-"*linea)
+                        print(f"-"*linea)
+        print("-"*linea)       
         categoriaL = obtenerCat(listaGastos) #se utiliza para recorrer la lista y dar los gastos por categoria
         for i in range (len(categoriaL)):
-            calcularCat(listaGastos,categoriaL[i])
-        
+            calcularCat(listaGastos,categoriaL[i],diaActual)
+
+
+def sumarCatMes(listaGastos,mes): #sin definir
+        for i in range(len(listaGastos)):
+            if(listaGastos[i]["fecha"][0]["dia"] == diaActual):
+                print(f'{listaGastos[i]["categoria"]}'.capitalize())
+            for q in range(len(listaGastos)):
+                    if listaGastos[q] == listaGastos[i] and listaGastos[q]["fecha"][0]["dia"] == diaActual:
+                        print(f'-Descripción: {listaGastos[q]["descripcion"]} | Monto: ${listaGastos[q]["monto"]} | Hora: {listaGastos[q]["fecha"][0]["hora"]}')
+                        print(f"-"*linea)
+        print("-"*linea)       
+        categoriaL = obtenerCat(listaGastos) #se utiliza para recorrer la lista y dar los gastos por categoria
+        for i in range (len(categoriaL)):
+            calcularCat(listaGastos,categoriaL[i],diaActual)
