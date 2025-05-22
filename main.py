@@ -35,10 +35,11 @@ while(ejecucionPrograma):
         print("Ingrese la información del gasto:\n")
         montoGasto = float(input("- Monto del gasto: "))
         categoriaGasto = input("- Categoría (ej. comida, transporte, entretenimiento, otros): ")
+        categoriaFormat = categoriaGasto.lower()
         descripcionGasto = input("- Descripción (opcional): ")
         dirGastos = {
             "monto":montoGasto, 
-            "categoria":categoriaGasto,
+            "categoria":categoriaFormat,
             "descripcion":descripcionGasto,
             "fecha":[]
                         }
@@ -56,7 +57,7 @@ while(ejecucionPrograma):
             #listaGastos.append(dirGastos)
             
         elif(eleccionFecha == 2):
-            fecha2 = input(f"Por favor digite la fecha y la hora del gasto(año-mes-dia-hora-minutos): ")
+            fecha2 = input(f"Por favor digite la fecha y la hora del gasto(dd-mm-aaaa HH-MM): ")
             fechaDiferente = (datetime.strptime(fecha2,"%d-%m-%Y %H-%M"))
             diaDif = fechaDiferente.strftime("%d-%m-%Y")
             horaDif = fechaDiferente.strftime("%H-%M")
@@ -64,10 +65,6 @@ while(ejecucionPrograma):
             dirFecha = {"dia":diaDif,
                         "hora": horaDif}
             dirGastos["fecha"].append(dirFecha)
-            
-
-            
-
         seleccion = input("Ingrese 'S' para guardar o 'C' para cancelar: ")
         seleccionMayus = seleccion.capitalize()
 
@@ -102,18 +99,19 @@ while(ejecucionPrograma):
                 mostrarTodos(listaGastos)
 
             elif(listarGasto == 2):
-                print(f"Categorias")
+                print(f"Categorias".center(linea))
                 print(f"="*linea)
                 categoria = obtenerCat(listaGastos)
                 for cat in range(len(categoria)):
                     print(f"{categoria[cat]}")
+                print(f"="*linea)
                 categoria = input(f"Por favor, digite la categoria que quieras consultar(ej. comida, transporte, entretenimiento, otros): \n")
-                catergoriaMayus = categoria.lower()
-                mostrarUna(listaGastos,categoria)
+                categoriaMayus = categoria.lower()
+                mostrarUna(listaGastos,categoriaMayus)
 
             elif(listarGasto == 3):
                 print("="*linea)
-                print("                Rango de fechas")
+                print(f"Rango de fechas".center(linea))
                 print("="*linea)
                 fechaInicialStr = input("Por favor, digite la fecha inicial(dd-mm-aaaa): ")
                 fechaFinalStr  = input("Por favor, digite la fecha final(dd-mm-aaaa): ")
@@ -151,15 +149,22 @@ while(ejecucionPrograma):
 
             elif(calcularGasto == 2): #Total semanal: Calcula y muestra el total de gastos de los últimos siete días.
                 print("="*linea)
-                print(str("Total Gastos Semanales").center(linea))
+                print(f"Total Gastos Semanales".center(linea))
                 fechaLimite = diaActualFormat - timedelta(days=7)
-                calcularSemanal(listaGastos,fechaLimite)
+                totalSemanal = calcularSemanal(listaGastos,fechaLimite)
+                print(f"Desde {fechaLimite}".center(linea))
+                print(f"{totalSemanal}".center(linea))
+                print("="*linea)
 
             elif(calcularGasto == 3):
                 print("="*linea)
-                print(str("Total Gasto Mensual").center(linea))
+                print(f"Total Gasto Mensual".center(linea))
                 mesFormat = datetime.strptime(diaActual, "%Y-%m-%d").month
-                calcularMes(listaGastos,mesFormat)
+                totalMes = calcularMes(listaGastos,mesFormat)
+                print(f"Para el mes: {mesFormat-1}".center(linea))
+                print(str(str(totalMes)+"").center(linea))
+                print(f"="*linea)
+
             elif(calcularGasto == 4):
                 print("="*linea)
 
@@ -188,7 +193,7 @@ while(ejecucionPrograma):
 
                 if(verGuardar == 1):
                     print("="*linea)
-                    print(f'Reporte de gastos del día:{diaActualFormat}')
+                    print(f'Reporte de Gastos del Día:{diaActualFormat}')
                     print("="*linea)
                     print(f"Total de Gastos: ${totalDiario}\n")
                     print(f"Por categorías: \n")
@@ -198,15 +203,24 @@ while(ejecucionPrograma):
                     guardarReporteEnJSON(listaGastos,"reporte_gastos_diario.json")   
             
             elif generarReporte == 2:
+                diaSuma = datetime.strptime(diaActual2,"%d-%m-%Y").date()
+                fechaLimite = diaSuma - timedelta(days=7)
+                totalSemanal = calcularSemanal(listaGastos,fechaLimite)
                 print("="*linea)
-                print(f'Reporte de gastos de la semana:')
-                print("="*linea)
+                print(f"Reporte de Gastos Semanales Desde: {fechaLimite}")
+                print(f"Total de Gastos: ${totalSemanal}\n")
+                sumarCatSemanal(listaGastos,fechaLimite)
 
             elif generarReporte == 3:
                 print("="*linea)
-                print(f'Reporte de gastos del mes:')
+                print(f"Reporte Gasto Mensual".center(linea))
+                diaActualOpc3 = str(datetime.now().date())
+                mesFormat = datetime.strptime(diaActualOpc3, "%Y-%m-%d").month
+                totalMes = calcularMes(listaGastos,mesFormat)
                 print("="*linea)
-
+                print(f"Reporte de Gastos Semanales Desde: {mesFormat}")
+                print(f"Total de Gastos: ${totalMes}\n")
+                sumarCatMensual(listaGastos,mesFormat)
 
             elif generarReporte ==4:
                 print("="*linea)
