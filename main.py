@@ -47,7 +47,11 @@ while(ejecucionPrograma):
         print("="*linea)
         eleccionFecha = int(input("Digite 1. si el gasto se ha realizado el dia de hoy o 2 si el gasto se ha realizado en otra fecha: "))
         print("="*linea)
+        while(eleccionFecha != 1 and eleccionFecha != 2):
+                eleccionFecha = int(input(("Opción incorrecta. Por favor valida las opciones y vuelve a intentarlo.\n")))
         if(eleccionFecha == 1):
+            
+
             fechaActual = (datetime.now()) #fecha del momento en que se ingresa el gasto
             fechaAhora = fechaActual.strftime("%d-%m-%Y")
             horaAhora = fechaActual.strftime("%H-%M")          

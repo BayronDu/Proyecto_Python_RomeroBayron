@@ -9,8 +9,8 @@ Este proyecto es una aplicacion en Pyhton que permite registrar, visualizar y ca
 | #  | Descripción                                                                 |
 |----|-----------------------------------------------------------------------------|
 | 1  | **Registrar Gastos**: Permite registrar el monto, categoría, descripción y fecha del gasto. |
-| 2  | **Listar Gastos**: Muestra los gastos de todos, por categoría o por rango de fechas. |
-| 3  | **Calcular Gastos**: Calcula el total de los gastos de forma diaria, semanal (últimos 7 días) o mensual. |
+| 2  | **Listar Gastos**: Muestra todos los gastos, por categoría o por rango de fechas. |
+| 3  | **Calcular Gastos**: Calcula el total de los gastos diarios, semanal (últimos 7 días) o mensual. |
 | 4  | **Generar Reportes**: Crea reportes de los gastos diarios, semanales (últimos 7 días) y mensuales. |
 
 ## Funcionalidades a Futuro (En Construcción)
@@ -23,17 +23,11 @@ Este proyecto es una aplicacion en Pyhton que permite registrar, visualizar y ca
 
 ---
 
-### Recomendaciones para Mejoras:
+### Enlace del repositorio y video de explicación del código:
 
-- **Validaciones al Registrar Gastos**: Asegurarse de que el monto sea un número positivo y que la fecha esté en el formato correcto.
-- **Mejoras en la Lista de Gastos**: Permitir ordenar los gastos por monto o fecha para facilitar la búsqueda.
-- **Cálculos Acumulados**: Implementar un sistema de acumulado para los cálculos diarios, semanales y mensuales, y definir correctamente las fechas.
-- **Exportación de Reportes**: Permitir la exportación de los reportes generados a formatos como CSV o PDF.
+- [Repositorio GitHub](URL)
+- [Video explicación]()
+-
 
-### Sugerencias para Futuro:
-
-- **Persistencia de Datos**: Integrar una base de datos para mejorar el rendimiento a medida que el sistema escala.
-- **Optimización de Cálculos**: Asegurarse de que los cálculos sean eficientes, especialmente al manejar grandes volúmenes de datos.
-- **Interfaz de Usuario**: Crear una interfaz de usuario limpia e intuitiva, idealmente con un framework moderno como React o Vue.js.
 
 ---
