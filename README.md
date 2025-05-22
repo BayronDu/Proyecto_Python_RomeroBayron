@@ -27,7 +27,6 @@ Este proyecto es una aplicacion en Pyhton que permite registrar, visualizar y ca
 
 - [Repositorio GitHub](https://github.com/BayronDu/Proyecto_Python_RomeroBayron)
 - [Video explicación](https://youtu.be/pKcTCW0bS9g)
--
 
 
 ---
