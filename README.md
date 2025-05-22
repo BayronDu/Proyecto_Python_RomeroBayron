@@ -3,6 +3,7 @@
 Este proyecto es una aplicacion en Pyhton que permite registrar, visualizar y calcular el total de los gastos personales de una persona. Se ha realizado con el fin de aplicar nuestros conocimientos en programación.
 
 ## Funcionalidades
+|--|--|
 | 1 | Registrar Gastos(monto, categoria, descripción y fecha) |
 | 2 | Listar Gastos: Todos, por categoria y por rango de fechas |
 | 3 | Calcular Gastos: Diario, semanal (7 días atrás) y mensual |
